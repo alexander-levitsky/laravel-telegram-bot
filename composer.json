@@ -1,9 +1,16 @@
 {
-    "name": "piro/telegram-bot",
-    "description": "",
+    "name": "alexander-levitsky/laravel-telegram-bot",
+    "description": "laravel telegram bot api",
     "keywords": ["laravel", "php"],
-    "license": "MIT",
-    "authors": [],
+    "license": "GPL-3.0-only",
+    "homepage": "https://github.com/alexander-levitsky/laravel-telegram-bot",
+    "authors": [
+        {
+            "name": "Alexander Levitsky",
+            "email": "piro@list.ru",
+            "role": "Developer"
+        }
+    ],
     "version": "0.0.1",
     "require": {
         "illuminate/console": "^6.3|^7.0|^8.0|^9.0",
