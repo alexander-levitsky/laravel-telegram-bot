@@ -1,9 +1,7 @@
 <?php
 
 namespace Piro\TelegramBot\Traits;
-
-
-
+use Illuminate\Support\Facades\Http;
 use Piro\TelegramBot\Exceptions\TelegramApiException;
 
 trait CanSendHttpRequest {
@@ -11,22 +9,19 @@ trait CanSendHttpRequest {
     /**
      * @throws TelegramApiException
      */
+
+    private function filter($input): array
+    {
+        foreach ($input as &$value) if (is_array($value)) $value = $this->filter($value);
+        return array_filter($input, fn($value)=>!!$value);
+    }
+
     private function postRequest(string $url, array $params = [])
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        curl_setopt($ch, CURLOPT_POST, 1);
-
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-
-        $content = curl_exec($ch);
-        curl_close($ch);
-
-        $json = json_decode($content);
-        if(!$json->ok) throw new TelegramApiException($content);
-        return $json->result;
+        $response = Http::post($url, $this->filter($params));
+        $data = $response->json();
+        if(!$data['ok']) throw new TelegramApiException(json_encode($params));
+        return $data['result'];
     }
 
 }

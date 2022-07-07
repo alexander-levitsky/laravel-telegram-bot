@@ -65,7 +65,6 @@ class Message extends BasicType
     public ?WebAppData $web_app_data;
     public ?InlineKeyboardMarkup $reply_markup;
 
-
     public function __construct(array|\stdClass $payload = [])
     {
         parent::__construct($payload);

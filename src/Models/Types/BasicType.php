@@ -7,7 +7,7 @@ use JsonSerializable;
 
 class BasicType
 {
-    public function __construct(\stdClass|array $payload = [])
+    public function __construct(array $payload = [])
     {
         foreach($payload as $attributeName=>$value){
 
@@ -30,5 +30,10 @@ class BasicType
                 $value = new $type($value);
             }
         }
+    }
+
+    public function __toString(): string
+    {
+        return json_encode($this);
     }
 }

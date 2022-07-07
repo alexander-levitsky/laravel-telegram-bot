@@ -1,7 +1,6 @@
 <?php
 
 namespace Piro\TelegramBot\Models;
-
 use Piro\TelegramBot\Exceptions\TelegramApiException;
 use Piro\TelegramBot\Models\Types\BotCommandScopeAllChatAdministrators;
 use Piro\TelegramBot\Models\Types\BotCommandScopeAllGroupChats;
@@ -11,6 +10,7 @@ use Piro\TelegramBot\Models\Types\BotCommandScopeChatAdministrators;
 use Piro\TelegramBot\Models\Types\BotCommandScopeChatMember;
 use Piro\TelegramBot\Models\Types\BotCommandScopeDefault;
 use Piro\TelegramBot\Models\Types\ChatAdministratorRights;
+use Piro\TelegramBot\Models\Types\ChatInviteLink;
 use Piro\TelegramBot\Models\Types\ChatMemberAdministrator;
 use Piro\TelegramBot\Models\Types\ChatMemberBanned;
 use Piro\TelegramBot\Models\Types\ChatMemberLeft;
@@ -82,7 +82,8 @@ class Bot
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $replyMarkup = null,
     ): Message
     {
-        return new Message($this->postRequest($this->url . 'sendMessage', [
+
+        $data = [
             'chat_id'=>$chatId,
             'text'=>$text,
             'parse_mode'=>$parseMode,
@@ -93,11 +94,13 @@ class Bot
             'reply_to_message_id'=>$replyToMessageId,
             'allow_sending_without_reply'=>$allowSendingWithoutReply,
             'reply_markup'=>$replyMarkup,
-        ]));
+        ];
+
+        return new Message($this->postRequest($this->url . 'sendMessage', $data));
     }
 
 
-    public function forwardMessage(int|string $chatId, int|string $fromChatId, ?int $messageId, ?bool $disableNotification , ?bool $protectContent): Message
+    public function forwardMessage(int|string $chatId, int|string $fromChatId, int $messageId = null, bool $disableNotification = null , bool $protectContent = null): Message
     {
         return new Message($this->postRequest($this->url . 'forwardMessage', [
             'chat_id' =>$chatId,
@@ -140,6 +143,19 @@ class Bot
         return $this->postRequest($this->url . "setMyCommands", ['commands'=>$commands,'scope'=>$scope, 'language_code'=>$languageCode]);
     }
 
+    function createChatInviteLink(int|string $chat_id, string $name = null, int $expire_date= null, int $member_limit= null, bool $creates_join_request= null)
+    {
+        return $this->postRequest($this->url . "createChatInviteLink", [
+            'chat_id'=>$chat_id,
+            'name'=>$name,
+            'expire_date'=>$expire_date,
+            'member_limit'=>$member_limit,
+            'creates_join_request'=>$creates_join_request,
+        ]);
+    }
+
+
+
     /**
      * @throws TelegramApiException
      */
@@ -151,7 +167,7 @@ class Bot
     function getChatMember(string|int $chatId, int $userId): ChatMemberOwner|ChatMemberAdministrator|ChatMemberMember|ChatMemberRestricted|ChatMemberLeft|ChatMemberBanned
     {
         $payload = $this->postRequest($this->url . "getChatMember", ['chat_id'=>$chatId, 'user_id'=>$userId]);
-        return match ($payload->status){
+        return match ($payload['status']){
             'creator' => new ChatMemberOwner($payload),
             'administrator' => new ChatMemberAdministrator($payload),
             'member' => new ChatMemberMember($payload),
