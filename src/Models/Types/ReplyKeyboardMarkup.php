@@ -5,8 +5,8 @@ namespace Piro\TelegramBot\Models\Types;
 class ReplyKeyboardMarkup extends BasicType
 {
     public array $keyboard;
-    public bool|null $resize_keyboard;
-    public bool|null $one_time_keyboard;
-    public string|null $input_field_placeholder;
-    public bool|null $selective;
+    public ?bool $resize_keyboard = null;
+    public ?bool $one_time_keyboard = null;
+    public ?string $input_field_placeholder = null;
+    public ?bool $selective = null;
 }

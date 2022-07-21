@@ -6,9 +6,9 @@ class CallbackGame extends BasicType
 {
     public int $user_id;
     public int $score;
-    public ?bool $force;
-    public ?bool $disable_edit_message;
-    public ?int $chat_id;
-    public ?int $message_id;
-    public ?string $inline_message_id;
+    public ?bool $force = null;
+    public ?bool $disable_edit_message = null;
+    public ?int $chat_id = null;
+    public ?int $message_id = null;
+    public ?string $inline_message_id = null;
 }

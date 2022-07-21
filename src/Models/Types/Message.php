@@ -2,68 +2,66 @@
 
 namespace Piro\TelegramBot\Models\Types;
 
-use function Piro\TelegramBot\Helpers\arrayOfType;
-
 class Message extends BasicType
 {
     public int $message_id;
-    public ?User $from;
-    public ?Chat $sender_chat;
-    public ?int $date;
-    public ?Chat $chat;
-    public ?User $forward_from;
-    public ?Chat $forward_from_chat;
-    public ?string $forward_signature;
-    public ?string $forward_sender_name;
-    public ?int $forward_date;
-    public ?bool $is_automatic_forward;
-    public ?Message $reply_to_message;
-    public ?User $via_bot;
-    public ?int $edit_date;
-    public ?bool $has_protected_content;
-    public ?string $media_group_id;
-    public ?string $author_signature;
-    public ?string $text;
-    public ?array $entities; // MessageEntity[]
-    public ?Animation $animation;
-    public ?Audio $audio;
-    public ?Document $document;
-    public ?array $photo; // PhotoSize[]
-    public ?Sticker $sticker;
-    public ?Video $video;
-    public ?VideoNote $video_note;
-    public ?Voice $voice;
-    public ?string $caption;
-    public ?array $caption_entities; // MessageEntity[]
-    public ?Contact $contact;
-    public ?Dice $dice;
-    public ?Game $game;
-    public ?Poll $poll;
-    public ?Venue $venue;
-    public ?Location $location;
-    public ?array $new_chat_members; // User[]
-    public ?User $left_chat_member;
-    public ?string $new_chat_title;
-    public ?array $new_chat_photo; // PhotoSize[]
-    public ?bool $delete_chat_photo;
-    public ?bool $group_chat_created;
-    public ?bool $supergroup_chat_created;
-    public ?bool $channel_chat_created;
-    public ?MessageAutoDeleteTimerChanged $message_auto_delete_timer_changed;
-    public ?int $migrate_to_chat_id;
-    public ?int $migrate_from_chat_id;
-    public ?Message $pinned_message;
-    public ?Invoice $invoice;
-    public ?SuccessfulPayment $successful_payment;
-    public ?string $connected_website;
-    public ?PassportData $passport_data;
-    public ?ProximityAlertTriggered $proximity_alert_triggered;
-    public ?VideoChatScheduled $video_chat_scheduled;
-    public ?VideoChatStarted $video_chat_started;
-    public ?VideoChatEnded $video_chat_ended;
-    public ?VideoChatParticipantsInvited $video_chat_participants_invited;
-    public ?WebAppData $web_app_data;
-    public ?InlineKeyboardMarkup $reply_markup;
+    public ?User $from = null;
+    public ?Chat $sender_chat = null;
+    public ?int $date = null;
+    public ?Chat $chat = null;
+    public ?User $forward_from = null;
+    public ?Chat $forward_from_chat = null;
+    public ?string $forward_signature = null;
+    public ?string $forward_sender_name = null;
+    public ?int $forward_date = null;
+    public ?bool $is_automatic_forward = null;
+    public ?Message $reply_to_message = null;
+    public ?User $via_bot = null;
+    public ?int $edit_date = null;
+    public ?bool $has_protected_content = null;
+    public ?string $media_group_id = null;
+    public ?string $author_signature = null;
+    public ?string $text = null;
+    public ?array $entities = null; // MessageEntity[]
+    public ?Animation $animation = null;
+    public ?Audio $audio = null;
+    public ?Document $document = null;
+    public ?array $photo = null; // PhotoSize[]
+    public ?Sticker $sticker = null;
+    public ?Video $video = null;
+    public ?VideoNote $video_note = null;
+    public ?Voice $voice = null;
+    public ?string $caption = null;
+    public ?array $caption_entities = null; // MessageEntity[]
+    public ?Contact $contact = null;
+    public ?Dice $dice = null;
+    public ?Game $game = null;
+    public ?Poll $poll = null;
+    public ?Venue $venue = null;
+    public ?Location $location = null;
+    public ?array $new_chat_members = null; // User[]
+    public ?User $left_chat_member = null;
+    public ?string $new_chat_title = null;
+    public ?array $new_chat_photo = null; // PhotoSize[]
+    public ?bool $delete_chat_photo = null;
+    public ?bool $group_chat_created = null;
+    public ?bool $supergroup_chat_created = null;
+    public ?bool $channel_chat_created = null;
+    public ?MessageAutoDeleteTimerChanged $message_auto_delete_timer_changed = null;
+    public ?int $migrate_to_chat_id = null;
+    public ?int $migrate_from_chat_id = null;
+    public ?Message $pinned_message = null;
+    public ?Invoice $invoice = null;
+    public ?SuccessfulPayment $successful_payment = null;
+    public ?string $connected_website = null;
+    public ?PassportData $passport_data = null;
+    public ?ProximityAlertTriggered $proximity_alert_triggered = null;
+    public ?VideoChatScheduled $video_chat_scheduled = null;
+    public ?VideoChatStarted $video_chat_started = null;
+    public ?VideoChatEnded $video_chat_ended = null;
+    public ?VideoChatParticipantsInvited $video_chat_participants_invited = null;
+    public ?WebAppData $web_app_data = null;
+    public ?InlineKeyboardMarkup $reply_markup = null;
 
     public function __construct(array|\stdClass $payload = [])
     {

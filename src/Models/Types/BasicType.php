@@ -3,7 +3,6 @@
 namespace Piro\TelegramBot\Models\Types;
 
 use ReflectionProperty;
-use JsonSerializable;
 
 class BasicType
 {

@@ -5,16 +5,16 @@ namespace Piro\TelegramBot\Models\Types;
 class Update extends BasicType
 {
     public int $update_id;
-    public Message|null $message;
-    public Message|null $edited_message;
-    public Message|null $channel_post;
-    public Message|null $edited_channel_post;
-    public InlineQuery|null $inline_query;
-    public ChosenInlineResult|null $chosen_inline_result;
-    public CallbackQuery|null $callback_query;
-    public ShippingQuery|null $shipping_query;
-    public PreCheckoutQuery|null $pre_checkout_query;
-    public Poll|null $poll;
-    public ChatMemberUpdated|null $my_chat_member;
-    public ChatJoinRequest|null $chat_join_request;
+    public ?Message $message = null;
+    public ?Message $edited_message = null;
+    public ?Message $channel_post = null;
+    public ?Message $edited_channel_post = null;
+    public ?InlineQuery $inline_query = null;
+    public ?ChosenInlineResult $chosen_inline_result = null;
+    public ?CallbackQuery $callback_query = null;
+    public ?ShippingQuery $shipping_query = null;
+    public ?PreCheckoutQuery $pre_checkout_query = null;
+    public ?Poll $poll = null;
+    public ?ChatMemberUpdated $my_chat_member = null;
+    public ?ChatJoinRequest $chat_join_request = null;
 }

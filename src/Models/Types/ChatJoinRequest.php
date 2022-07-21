@@ -4,9 +4,9 @@ namespace Piro\TelegramBot\Models\Types;
 
 class ChatJoinRequest extends BasicType
 {
-    public Chat $chat ;
+    public Chat $chat;
     public User $from;
     public int $date;
-    public string|null $bio;
-    public ChatInviteLink|null $invite_link;
+    public ?string $bio = null;
+    public ?ChatInviteLink $invite_link = null;
 }

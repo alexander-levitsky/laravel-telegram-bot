@@ -4,9 +4,9 @@ namespace Piro\TelegramBot\Models\Types;
 
 class ChosenInlineResult extends BasicType
 {
-public string $result_id;
-public User $from;
-public Location|null $location;
-public string|null $inline_message_id;
-public string $query;
+    public string $result_id;
+    public User $from;
+    public string $query;
+    public ?Location $location = null;
+    public ?string $inline_message_id = null;
 }
