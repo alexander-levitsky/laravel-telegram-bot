@@ -11,7 +11,7 @@
             "role": "Developer"
         }
     ],
-    "version": "2.0.1",
+    "version": "2.0.2",
     "require": {
         "illuminate/console": "^10.0",
         "illuminate/http": "^10.0",

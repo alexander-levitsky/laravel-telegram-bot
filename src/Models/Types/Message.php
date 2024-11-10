@@ -16,6 +16,7 @@ class Message extends BasicType
     public ?int $forward_date = null;
     public ?bool $is_automatic_forward = null;
     public ?Message $reply_to_message = null;
+    public ?TextQuote $quote = null;
     public ?User $via_bot = null;
     public ?int $edit_date = null;
     public ?bool $has_protected_content = null;
