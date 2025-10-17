@@ -185,5 +185,19 @@ class Bot
         return new ChatAdministratorRights($this->postRequest($this->url . "getMyDefaultAdministratorRights", ['for_channels'=>$forChannels]));
     }
 
+    /**
+     * @throws TelegramApiException
+     */
+    function answerCallbackQuery(string|int $callbackQueryId, ?string $text = null, ?bool $showAlert = null, ?string $url = null, ?int $cacheTime = null): bool
+    {
+        return $this->postRequest($this->url . "answerCallbackQuery", [
+            'callback_query_id'=>$callbackQueryId,
+            'text'=>$text,
+            'show_alert'=>$showAlert,
+            'url'=>$url,
+            'cache_time'=>$cacheTime,
+        ]);
+    }
+
 
 }
