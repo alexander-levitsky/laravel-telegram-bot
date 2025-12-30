@@ -72,14 +72,14 @@ class Bot
     function sendMessage(
         int|string $chatId,
         string $text,
-        string $parseMode = null,
-        array $entities = null,
-        bool $disableWebPagePreview = null,
-        bool $disableNotification = null,
-        bool $protectContent = null,
-        int $replyToMessageId = null,
-        bool $allowSendingWithoutReply = null,
-        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $replyMarkup = null,
+        ?string $parseMode = null,
+        ?array $entities = null,
+        ?bool $disableWebPagePreview = null,
+        ?bool $disableNotification = null,
+        ?bool $protectContent = null,
+        ?int $replyToMessageId = null,
+        ?bool $allowSendingWithoutReply = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
     ): Message
     {
 
@@ -100,8 +100,13 @@ class Bot
     }
 
 
-    public function forwardMessage(int|string $chatId, int|string $fromChatId, int $messageId = null, bool $disableNotification = null , bool $protectContent = null): Message
-    {
+    public function forwardMessage(
+        int|string $chatId,
+        int|string $fromChatId,
+        ?int $messageId = null,
+        ?bool $disableNotification = null ,
+        ?bool $protectContent = null
+    ): Message {
         return new Message($this->postRequest($this->url . 'forwardMessage', [
             'chat_id' =>$chatId,
             'from_chat_id' =>$fromChatId,
@@ -116,7 +121,10 @@ class Bot
     /**
      * @throws TelegramApiException
      */
-    function getUpdates(int $offset = null, int $limit = null) : array
+    function getUpdates(
+        ?int $offset = null,
+        ?int $limit = null
+    ) : array
     {
         $results = $this->postRequest($this->url . 'getUpdates', ['offset'=>$offset,$limit=>$limit]);
         if(count($results)){
@@ -130,7 +138,10 @@ class Bot
     /**
      * @throws TelegramApiException
      */
-    function approveChatJoinRequest(string|int $chatId = null, string|int $userId = null)
+    function approveChatJoinRequest(
+        string|int|null $chatId = null,
+        string|int|null $userId = null
+    )
     {
         return $this->postRequest($this->url . "approveChatJoinRequest", ['chat_id'=>$chatId,'user_id'=>$userId]);
     }
@@ -138,12 +149,12 @@ class Bot
     /**
      * @throws TelegramApiException
      */
-    function setMyCommands(array $commands, BotCommandScopeDefault|BotCommandScopeAllPrivateChats|BotCommandScopeAllGroupChats|BotCommandScopeAllChatAdministrators|BotCommandScopeChat|BotCommandScopeChatAdministrators|BotCommandScopeChatMember $scope, string $languageCode = null): bool
+    function setMyCommands(array $commands, BotCommandScopeDefault|BotCommandScopeAllPrivateChats|BotCommandScopeAllGroupChats|BotCommandScopeAllChatAdministrators|BotCommandScopeChat|BotCommandScopeChatAdministrators|BotCommandScopeChatMember $scope, ?string $languageCode = null): bool
     {
         return $this->postRequest($this->url . "setMyCommands", ['commands'=>$commands,'scope'=>$scope, 'language_code'=>$languageCode]);
     }
 
-    function createChatInviteLink(int|string $chat_id, string $name = null, int $expire_date= null, int $member_limit= null, bool $creates_join_request= null)
+    function createChatInviteLink(int|string $chat_id, ?string $name = null, ?int $expire_date = null, ?int $member_limit = null, ?bool $creates_join_request= null)
     {
         return $this->postRequest($this->url . "createChatInviteLink", [
             'chat_id'=>$chat_id,
@@ -159,7 +170,7 @@ class Bot
     /**
      * @throws TelegramApiException
      */
-    function getMyCommands(BotCommandScopeDefault|BotCommandScopeAllPrivateChats|BotCommandScopeAllGroupChats|BotCommandScopeAllChatAdministrators|BotCommandScopeChat|BotCommandScopeChatAdministrators|BotCommandScopeChatMember $scope = null, string $languageCode = null): array
+    function getMyCommands(BotCommandScopeDefault|BotCommandScopeAllPrivateChats|BotCommandScopeAllGroupChats|BotCommandScopeAllChatAdministrators|BotCommandScopeChat|BotCommandScopeChatAdministrators|BotCommandScopeChatMember|null $scope = null, ?string $languageCode = null): array
     {
         return $this->postRequest($this->url . "getMyCommands", ['scope'=>$scope, 'language_code'=>$languageCode]);
     }
@@ -180,7 +191,7 @@ class Bot
     /**
      * @throws TelegramApiException
      */
-    function getMyDefaultAdministratorRights(bool $forChannels = null): ChatAdministratorRights
+    function getMyDefaultAdministratorRights(?bool $forChannels = null): ChatAdministratorRights
     {
         return new ChatAdministratorRights($this->postRequest($this->url . "getMyDefaultAdministratorRights", ['for_channels'=>$forChannels]));
     }
@@ -198,6 +209,4 @@ class Bot
             'cache_time'=>$cacheTime,
         ]);
     }
-
-
 }
